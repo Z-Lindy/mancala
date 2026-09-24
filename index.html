@@ -19,7 +19,53 @@
     <p class="mode-hint" id="mode-hint"></p>
     <div id="app"></div>
     <div id="scroller" class="scroller-panel"></div>
+
+    <section class="rules-panel">
+      <h2>How to Play</h2>
+      <div class="rules-content" id="rules-panel-content"></div>
+    </section>
   </main>
+
+  <div id="rules-modal" class="modal-overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rules-modal-title">
+      <h2 id="rules-modal-title">How to Play Mancala</h2>
+      <div class="rules-content" id="rules-modal-content"></div>
+      <button id="rules-modal-close" type="button" class="new-game-btn">Start Playing</button>
+    </div>
+  </div>
+
+  <template id="rules-template">
+    <h3>Overview &amp; Setup</h3>
+    <p>Mancala is a two-player strategy game played by sowing seeds around a board, one pit at a time, trying to end up ahead of your opponent — or, in Cooperative mode, exactly even with them.</p>
+    <ul>
+      <li><strong>Board:</strong> 2 rows of 6 small pits ("houses"), one row per player, plus 1 larger pit ("store") at the right end of each player's own row.</li>
+      <li><strong>Setup:</strong> each of the 12 houses starts with 4 seeds. Both stores start empty.</li>
+    </ul>
+
+    <h3>Taking a Turn</h3>
+    <ol>
+      <li>Pick up all the seeds from one of your own non-empty houses.</li>
+      <li>Sow them one at a time into each following pit, moving counter-clockwise — including your own store, but skipping your opponent's store entirely.</li>
+      <li>Play passes to the other player.</li>
+    </ol>
+    <p><strong>House rule:</strong> landing your last seed in your own store does <em>not</em> earn an extra turn here. Every turn is exactly one move.</p>
+
+    <h3>Capturing Seeds</h3>
+    <p>If your last seed lands in an <strong>empty house on your own side</strong>, you capture it plus every seed in the opponent's house directly opposite it — all of it goes straight into your store.</p>
+
+    <h3>Ending the Game</h3>
+    <p>The game ends the moment one player's row of 6 houses is empty. The other player sweeps every seed remaining on their side into their own store.</p>
+
+    <h3>How to Win</h3>
+    <table class="rules-table">
+      <thead><tr><th>Mode</th><th>Objective</th></tr></thead>
+      <tbody>
+        <tr><td>Competitive</td><td>Capture more seeds into your store than your opponent. Most seeds when the game ends wins; equal is a tie.</td></tr>
+        <tr><td>Cooperative</td><td>End the game with <strong>the same</strong> number of seeds in both stores — you both win together.</td></tr>
+      </tbody>
+    </table>
+  </template>
+
   <script type="module" src="src/main.js"></script>
 </body>
 </html>

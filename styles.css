@@ -307,3 +307,104 @@ body {
   opacity: 0.8;
   font-style: italic;
 }
+
+/* Rules content — shared typography for both the popup and the panel */
+
+.rules-content h3 {
+  margin: 1.25rem 0 0.4rem;
+  font-size: 1rem;
+  color: var(--wood-dark);
+}
+
+.rules-content h3:first-child {
+  margin-top: 0;
+}
+
+.rules-content p,
+.rules-content ul,
+.rules-content ol {
+  margin: 0.4rem 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.rules-content ul,
+.rules-content ol {
+  padding-left: 1.3rem;
+}
+
+.rules-content li {
+  margin: 0.2rem 0;
+}
+
+.rules-table {
+  width: 100%;
+  margin: 0.5rem 0;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.rules-table th,
+.rules-table td {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid rgba(107, 66, 38, 0.2);
+  vertical-align: top;
+}
+
+.rules-table th {
+  background: rgba(107, 66, 38, 0.08);
+  color: var(--wood-dark);
+}
+
+/* Persistent rules panel below the board */
+
+.rules-panel {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(107, 66, 38, 0.2);
+}
+
+.rules-panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+/* Pre-play rules popup */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(42, 28, 18, 0.55);
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal {
+  width: 100%;
+  max-width: 480px;
+  max-height: min(80vh, 700px);
+  overflow-y: auto;
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.modal h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.3rem;
+}
+
+.modal .new-game-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1.25rem;
+}

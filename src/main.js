@@ -95,4 +95,36 @@ modeRadios.forEach((radio) => {
   });
 });
 
+// Rules content lives once in the page as a <template> and is cloned into
+// both the pre-play popup and the persistent reference panel below the board.
+function fillRulesContainers() {
+  const template = document.getElementById("rules-template");
+  document.querySelectorAll(".rules-content").forEach((el) => {
+    el.appendChild(template.content.cloneNode(true));
+  });
+}
+
+function setupRulesModal() {
+  const modal = document.getElementById("rules-modal");
+  const closeBtn = document.getElementById("rules-modal-close");
+
+  const close = () => {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  };
+
+  closeBtn.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) close();
+  });
+
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+
+fillRulesContainers();
+setupRulesModal();
 render();
