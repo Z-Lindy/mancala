@@ -4,6 +4,7 @@
   --pit-color: #3d2a1e;
   --seed-color: #f2e6d0;
   --accent: #e8b04b;
+  --assist-color: #3f9c95;
   --text-color: #2a1c12;
   --bg: #f4ede3;
 }
@@ -55,10 +56,34 @@ body {
 }
 
 .mode-hint {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.5rem;
   font-size: 0.85rem;
   color: var(--wood-dark);
   opacity: 0.85;
+}
+
+.assist-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.assist-toggle[hidden] {
+  display: none;
+}
+
+.assist-status {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--assist-color);
+}
+
+.assist-status[hidden] {
+  display: none;
 }
 
 .new-game-btn {
@@ -242,6 +267,19 @@ body {
 
 .pit--played {
   box-shadow: 0 0 0 3px var(--accent);
+}
+
+.pit--suggested {
+  animation: assistPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes assistPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px var(--assist-color), 0 0 8px 2px rgba(63, 156, 149, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 4px var(--assist-color), 0 0 18px 5px rgba(63, 156, 149, 0.75);
+  }
 }
 
 .status {

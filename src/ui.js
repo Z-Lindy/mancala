@@ -60,15 +60,25 @@ function buildSeedLayer(count, slots, cap, { popLast = false } = {}) {
 // `displayState` is whatever snapshot should currently be shown (live state,
 // or a past turn from history). `interactive` gates whether pits are
 // clickable — false while rewinding through history. `playedPit` highlights
-// the pit that produced this snapshot, if any.
-export function renderBoard({ displayState, rules, mode, interactive, playedPit, root, onPitClick }) {
+// the pit that produced this snapshot, if any. `suggestedPit`, when set,
+// highlights the Assist mode's recommended pit for the player to move.
+export function renderBoard({
+  displayState,
+  rules,
+  mode,
+  interactive,
+  playedPit,
+  suggestedPit,
+  root,
+  onPitClick,
+}) {
   root.innerHTML = "";
 
   const board = document.createElement("div");
   board.className = "board";
 
   board.appendChild(renderStore(displayState, 2, "left"));
-  board.appendChild(renderPitRows(displayState, rules, interactive, playedPit, onPitClick));
+  board.appendChild(renderPitRows(displayState, rules, interactive, playedPit, suggestedPit, onPitClick));
   board.appendChild(renderStore(displayState, 1, "right"));
 
   root.appendChild(board);
@@ -100,7 +110,7 @@ function renderStore(state, player, side) {
   return el;
 }
 
-function renderPitRows(state, rules, interactive, playedPit, onPitClick) {
+function renderPitRows(state, rules, interactive, playedPit, suggestedPit, onPitClick) {
   const wrap = document.createElement("div");
   wrap.className = "pit-rows";
 
@@ -111,14 +121,14 @@ function renderPitRows(state, rules, interactive, playedPit, onPitClick) {
   const topRow = document.createElement("div");
   topRow.className = "pit-row pit-row--top";
   for (let i = P2_PITS.length - 1; i >= 0; i--) {
-    topRow.appendChild(renderPit(state, P2_PITS[i], validMoves, playedPit, onPitClick));
+    topRow.appendChild(renderPit(state, P2_PITS[i], validMoves, playedPit, suggestedPit, onPitClick));
   }
 
   // Bottom row: Player 1 pits, left-to-right (0 -> 5)
   const bottomRow = document.createElement("div");
   bottomRow.className = "pit-row pit-row--bottom";
   for (const i of P1_PITS) {
-    bottomRow.appendChild(renderPit(state, i, validMoves, playedPit, onPitClick));
+    bottomRow.appendChild(renderPit(state, i, validMoves, playedPit, suggestedPit, onPitClick));
   }
 
   wrap.appendChild(topRow);
@@ -126,7 +136,7 @@ function renderPitRows(state, rules, interactive, playedPit, onPitClick) {
   return wrap;
 }
 
-function renderPit(state, index, validMoves, playedPit, onPitClick) {
+function renderPit(state, index, validMoves, playedPit, suggestedPit, onPitClick) {
   const count = state.pits[index];
   const pit = document.createElement("button");
   pit.className = "pit";
@@ -137,6 +147,10 @@ function renderPit(state, index, validMoves, playedPit, onPitClick) {
 
   if (index === playedPit) {
     pit.classList.add("pit--played");
+  }
+
+  if (index === suggestedPit) {
+    pit.classList.add("pit--suggested");
   }
 
   const playable = validMoves.includes(index);

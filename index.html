@@ -17,6 +17,10 @@
       <button id="new-game" type="button" class="new-game-btn">New Game</button>
     </header>
     <p class="mode-hint" id="mode-hint"></p>
+    <label class="assist-toggle" id="assist-toggle" hidden>
+      <input type="checkbox" id="assist-checkbox" /> Assist — highlight the best pit to play
+    </label>
+    <p class="assist-status" id="assist-status" hidden></p>
     <div id="app"></div>
     <div id="scroller" class="scroller-panel"></div>
 
@@ -64,6 +68,7 @@
         <tr><td>Cooperative</td><td>End the game with <strong>the same</strong> number of seeds in both stores — you both win together.</td></tr>
       </tbody>
     </table>
+    <p>Stuck on Cooperative mode? Turn on <strong>Assist</strong> above the board — it highlights the pit its search thinks gives you the best shot at ending exactly equal.</p>
   </template>
 
   <script type="module" src="src/main.js"></script>
